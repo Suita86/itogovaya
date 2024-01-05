@@ -91,6 +91,42 @@ suita@suita-VirtualBox:~$ sudo dpkg -r vivaldi-stable_3.8.2259.42-1_amd64.deb
   443  sudo dpkg -r mysql-server-8.0
   444  sudo dpkg -i mysql-server-8.0
   445  history
+
+
+7. В подключенном MySQL репозитории создать базу данных “Друзья
+человека”
+sql
+CREATE DATABASE Друзья человека;
+USE Друзья человека;
+
+8. Создать таблицы с иерархией из диаграммы в БД
+
+sql
+CREATE TABLE Родительский (
+    id INT PRIMARY KEY,
+    имя VARCHAR(50),
+    возраст INT,
+    тип VARCHAR(50)
+);
+
+CREATE TABLE Домашние_животные (
+    id INT PRIMARY KEY,
+    имя VARCHAR(50),
+    команды VARCHAR(100),
+    дата_рождения DATE,
+    FOREIGN KEY (id) REFERENCES Родительский(id)
+);
+
+CREATE TABLE Вьючные_животные (
+    id INT PRIMARY KEY,
+    имя VARCHAR(50),
+    команды VARCHAR(100),
+    дата_рождения DATE,
+    FOREIGN KEY (id) REFERENCES Родительский(id)
+);
+
+
+  
  
 
 
